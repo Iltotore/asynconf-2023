@@ -30,6 +30,7 @@ object ValueRange:
         max <- elementReader(right)
       yield
         Between(min, max)
+    case _ => None
 
   given decoder[A : Ordering](using decoder: ColumnDecoder[A]): ColumnDecoder[ValueRange[A]] = ColumnDecoder.string.mapEither:
     case s"*-$left" => decoder.decode(left).map(Less.apply)
