@@ -1,0 +1,5 @@
+# Project exclude paths
+/.bsp/
+/out/
+/out/compile.dest/classes/
+/out/mill-build/compile.dest/classes/
