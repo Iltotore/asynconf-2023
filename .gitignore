@@ -3,3 +3,7 @@
 /out/
 /out/compile.dest/classes/
 /out/mill-build/compile.dest/classes/
+/.metals/
+/.bloop/
+/.vscode/
+/.idea/
