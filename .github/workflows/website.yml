@@ -40,10 +40,13 @@ jobs:
       - name: Copy files
         run: mkdir site && cp -r ./out site/out && cp index.html site/index.html && cp tyrianApp.js site/tyrianApp.js && cp -R resources site/resources
 
-      - name: Set permissions
-        run: chmod -R u+rwx site
+      - name: Fix permissions
+        run: |
+          chmod -c -R +rX "site/" | while read line; do
+            echo "::warning title=Invalid file permissions automatically fixed::$line"
+          done
 
-      - uses: actions/upload-pages-artifact@v1.0.4
+      - uses: actions/upload-pages-artifact@v2
         with:
           path: site
 
