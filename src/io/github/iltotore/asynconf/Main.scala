@@ -81,7 +81,6 @@ object Main extends TyrianApp[AppMessage, App]:
       (app.copy(scoreRegistry = app.scoreRegistry.copy(years = scores)), Cmd.None)
 
     case AppMessage.Select(attribute, value) =>
-      println(s"Select $attribute: $value")
       (app.copy(selection = app.selection.updateAttribute(attribute, value)), Cmd.None)
 
     case _ => (app, Cmd.None)
