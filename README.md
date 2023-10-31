@@ -4,9 +4,15 @@ Soumission de Raphaël FROMENTIN (Il_totore) au hackaton de l'Asynconf 2023.
 
 ## Lancer le projet
 
+### Sur Github Pages
+
+Le projet exécuté est disponible [ici](https://iltotore.github.io/asynconf-2023).
+
+### En local
+
 Pour lancer le projet, il faut le compiler puis lancer un serveur web à sa racine (par exemple avec `php -S localhost:8080`)
 
-### Compiler le projet
+#### Compiler le projet
 
 Sur Windows:
 
