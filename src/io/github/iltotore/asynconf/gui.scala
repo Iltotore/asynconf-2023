@@ -22,6 +22,9 @@ def renderMileageOption(range: ValueRange[Kilometer]): Html[AppMessage] =
 def renderYearOption(range: ValueRange[Year]): Html[AppMessage] =
   option(value := range.toString)(range.toString)
 
+def renderPassengerOption(count: PassengerCount): Html[AppMessage] =
+  option(value := count.toString)(count.toString)
+
 def renderOptions[A, B](
     attribute: InterestAttribute[A],
     elements: Iterable[B],
@@ -49,3 +52,7 @@ def renderMileages(ranges: Iterable[ValueRange[Kilometer]]): Html[AppMessage] =
 def renderYears(ranges: Iterable[ValueRange[Year]]): Html[AppMessage] =
   def readYear(value: String) = value.toIntOption.flatMap(Year.option)
   renderOptions(InterestAttribute.Year, ranges, "year", "Année:", renderYearOption, ValueRange.fromString(_, readYear))
+
+def renderPassengers(passengers: Iterable[PassengerCount]): Html[AppMessage] =
+  def readPassengerCount(value: String) = value.toIntOption.flatMap(PassengerCount.option)
+  renderOptions(InterestAttribute.Passengers, passengers, "passenger_count", "Nombre de passagers", renderPassengerOption, readPassengerCount)

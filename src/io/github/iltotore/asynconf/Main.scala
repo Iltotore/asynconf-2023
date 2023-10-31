@@ -81,6 +81,7 @@ object Main extends TyrianApp[AppMessage, App]:
       renderEnergies(scoreRegistry.energyTypes.keys),
       renderMileages(scoreRegistry.mileages.keys),
       renderYears(scoreRegistry.years.keys),
+      renderPassengers(app.interestRegistry.bonusInterests.keys),
       app.score.fold(div())(score => label(s"Score: $score")),
       app.interest.fold(div())(interest => label(s"Taux d'intérêt: $interest"))
     )
