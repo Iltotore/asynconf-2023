@@ -1,0 +1,60 @@
+h1 {
+    color: green;
+    font-weight: bold;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    grid-gap: 10px;
+    width: 70%;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.choice > label {
+    grid-column: 1;
+}
+
+.choice > select {
+    grid-column: 2;
+}
+
+.choice {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+#vehicle_type {
+    grid-row: 1
+}
+
+#energy {
+    grid-row: 2;
+}
+
+#mileage {
+    grid-row: 3;
+}
+
+#year {
+    grid-row: 4;
+}
+
+#passenger_count {
+    grid-row: 5
+}
+
+#score {
+    grid-row: 7
+}
+
+#interest {
+    grid-row: 8
+}
+
+.title {
+    font-weight: bold;
+}

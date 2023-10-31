@@ -98,13 +98,15 @@ object Main extends TyrianApp[AppMessage, App]:
     div(
       h1("Green Bank"),
       h2("Calculez votre taux d'intérêt"),
-      renderVehicleTypes(scoreRegistry.vehicleTypes),
-      renderEnergies(scoreRegistry.energyTypes.keys),
-      renderMileages(scoreRegistry.mileages.keys),
-      renderYears(scoreRegistry.years.keys),
-      renderPassengers(app.interestRegistry.bonusInterests.keys),
-      app.score.fold(div())(score => label(s"Score: $score")),
-      app.interest.fold(div())(interest => label(s"Taux d'intérêt: $interest"))
+      div(id := "grid")(
+        renderVehicleTypes(scoreRegistry.vehicleTypes),
+        renderEnergies(scoreRegistry.energyTypes.keys),
+        renderMileages(scoreRegistry.mileages.keys),
+        renderYears(scoreRegistry.years.keys),
+        renderPassengers(app.interestRegistry.bonusInterests.keys),
+        app.score.fold(div())(score => label(id := "score")(s"Score: $score")),
+        app.interest.fold(div())(interest => label(id := "interest")(s"Taux d'intérêt: $interest %"))
+      )
     )
 
   /**

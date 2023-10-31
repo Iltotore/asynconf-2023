@@ -19,8 +19,8 @@ val noneOption: Html[AppMessage] =
   */
 def renderVehicleTypeOption(name: VehicleName, vehicleType: VehicleType): Html[AppMessage] =
   option(value := name.value)(
-    label(name.value),
-    label(s"Poids: ${vehicleType.weight}")
+    label(`class` := "title")(name.value),
+    label(s" Poids: ${vehicleType.weight}")
   )
 
 /**
@@ -73,13 +73,13 @@ def renderPassengerOption(count: PassengerCount): Html[AppMessage] =
 def renderOptions[A, B](
     attribute: InterestAttribute[A],
     elements: Iterable[B],
-    id: String,
+    identifier: String,
     labelText: String,
     renderer: B => Html[AppMessage],
     reader: String => Option[A]
-): Html[AppMessage] = div(
-  label(`for` := id)(labelText),
-  select(`name` := id, onChange(selected => AppMessage.Select(attribute, reader(selected))))(
+): Html[AppMessage] = div(id := identifier, `class` := "choice")(
+  label(`for` := identifier)(labelText),
+  select(`name` := identifier, onChange(selected => AppMessage.Select(attribute, reader(selected))))(
     noneOption :: elements.map(renderer).toList
   )
 )
