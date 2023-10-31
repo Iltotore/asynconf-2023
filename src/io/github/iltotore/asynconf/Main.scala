@@ -27,15 +27,15 @@ object Main extends TyrianApp[AppMessage, App]:
    */
   def init(flags: Map[String, String]): (App, Cmd[IO, AppMessage]) =
 
-    val loadScoreInterest = loadCSV[(ValueRange[EcoScore], Percent)]("/resources/interest/score.csv").map(_.to(ListMap))
-    val loadPassengerInterest = loadCSV[(PassengerCount, Percent)]("/resources/interest/passenger.csv").map(_.to(ListMap))
+    val loadScoreInterest = loadCSV[(ValueRange[EcoScore], Percent)]("./resources/interest/score.csv").map(_.to(ListMap))
+    val loadPassengerInterest = loadCSV[(PassengerCount, Percent)]("./resources/interest/passenger.csv").map(_.to(ListMap))
 
-    val loadVehicleScores = loadCSV[Vehicle]("/resources/score/vehicle.csv")
+    val loadVehicleScores = loadCSV[Vehicle]("./resources/score/vehicle.csv")
       .map(_.map(x => (x.name, x.vehicleType)))
       .map(_.toMap)
-    val loadEnergyScores = loadCSV[(EnergyName, EcoScore)]("/resources/score/energy.csv").map(_.to(ListMap))
-    val loadMileageScores = loadCSV[(ValueRange[Kilometer], EcoScore)]("/resources/score/mileage.csv").map(_.to(ListMap))
-    val loadYearScores = loadCSV[(ValueRange[Year], EcoScore)]("/resources/score/year.csv").map(_.to(ListMap))
+    val loadEnergyScores = loadCSV[(EnergyName, EcoScore)]("./resources/score/energy.csv").map(_.to(ListMap))
+    val loadMileageScores = loadCSV[(ValueRange[Kilometer], EcoScore)]("./resources/score/mileage.csv").map(_.to(ListMap))
+    val loadYearScores = loadCSV[(ValueRange[Year], EcoScore)]("./resources/score/year.csv").map(_.to(ListMap))
 
     val cmd = Cmd.combineAll(List(
       Cmd.Run(loadScoreInterest, AppMessage.LoadedScoreInterest.apply),
