@@ -14,8 +14,17 @@ import scala.collection.immutable.ListMap
 @JSExportTopLevel("TyrianApp")
 object Main extends TyrianApp[AppMessage, App]:
 
+  /**
+   * The routes of the app (none).
+   */
   def router: Location => AppMessage = Routing.none(AppMessage.None)
 
+  /**
+   * The initialization function.
+   * 
+   * @param flags the launch flags passed to the app
+   * @return the initial state of the app and tasks to execute
+   */
   def init(flags: Map[String, String]): (App, Cmd[IO, AppMessage]) =
 
     val loadScoreInterest = loadCSV[(ValueRange[EcoScore], Percent)]("/resources/interest/score.csv").map(_.to(ListMap))
@@ -39,6 +48,12 @@ object Main extends TyrianApp[AppMessage, App]:
 
     (App.empty, cmd)
 
+  /**
+   * Update the given app according to the passed events.
+   * 
+   * @param app the current state of the app
+   * @return a function taking an event and returning the updated app state
+   */
   def update(app: App): AppMessage => (App, Cmd[IO, AppMessage]) =
 
     case AppMessage.LoadedScoreInterest(interest) =>
@@ -71,6 +86,12 @@ object Main extends TyrianApp[AppMessage, App]:
 
     case _ => (app, Cmd.None)
 
+  /**
+   * Render the given app state.
+   * 
+   * @param app the current app state
+   * @return the HTML node representing the given state
+   */
   def view(app: App): Html[AppMessage] =
     val scoreRegistry = app.scoreRegistry
 
@@ -86,5 +107,8 @@ object Main extends TyrianApp[AppMessage, App]:
       app.interest.fold(div())(interest => label(s"Taux d'intérêt: $interest"))
     )
 
+  /**
+   * The app's subscriptions/background repating tasks.
+   */
   def subscriptions(model: App): Sub[IO, AppMessage] =
     Sub.None
