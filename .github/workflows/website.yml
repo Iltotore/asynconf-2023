@@ -37,8 +37,14 @@ jobs:
       - name: Build
         run: chmod u+x millw && ./millw fastLinkJS
 
+      - name: Copy files
+        run: mkdir site && cp -r ./out site/out && cp index.html site/index.html && cp tyrianApp.js site/tyrianApp.js && cp -R resources site/resources
+
+      - name: Set permissions
+        run: chmod -R u+rwx site
+
       - uses: actions/upload-pages-artifact@v1.0.4
         with:
-          path: ./
+          path: site
 
       - uses: actions/deploy-pages@v1.0.10
